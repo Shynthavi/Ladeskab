@@ -4,13 +4,9 @@ using System.Text;
 
 namespace Ladeskabsystem.Interfaces
 {
-    public class RfidEventArgs : EventArgs
-    {
-        public bool isDetected { get; set; }
-    }
-
     public interface IRfidReader
     {
+        void checkId(int Id);
         event EventHandler<RfidEventArgs> RfidEvent;
     }
 }

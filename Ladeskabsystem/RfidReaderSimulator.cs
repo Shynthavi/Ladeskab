@@ -6,21 +6,27 @@ using Ladeskabsystem.Interfaces;
 
 namespace Ladeskabsystem
 {
+    public class RfidEventArgs : EventArgs
+    {
+        public int Id { get; set; }
+    }
+
+
     public class RfidReaderSimulator : IRfidReader
     {
-        private IStationControl _stationControl;
-        public RfidReaderSimulator(IStationControl StationControl)
-        {
-            _stationControl = StationControl;
-        }
+  
         public event EventHandler<RfidEventArgs> RfidEvent;
 
-        private int _id;
-
-
-        public void SimulateIdReading(int id)
+        public void checkId(int id)
         {
-            _stationControl.RfidDetected(_id);
+            if (0 < id)
+            {
+                OnNewRfid(new RfidEventArgs(){ Id = id });
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException("Id is out of range");
+            }
         }
 
         public void OnNewRfid(RfidEventArgs e)
