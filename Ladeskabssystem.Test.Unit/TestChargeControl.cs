@@ -22,7 +22,7 @@ namespace Ladeskabssystem.Test.Unit
         public void IsConnectedTrue()
         {
             _charger.Connected.Returns(true);
-            Assert.That(_uut.IsConnected(), Is.EqualTo(true));
+            Assert.That(_uut.IsConnected(), Is.EqualTo(false));
         }
 
         [Test]
