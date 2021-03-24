@@ -17,19 +17,16 @@ namespace Ladeskabssystem.Test.Unit
     public class TestRfidReaderSimulator
     {
         private RfidReaderSimulator _uut;
-        private IStationControl _stationControl;
 
         public void Setup()
         {
             _uut = new RfidReaderSimulator();
-            _stationControl = Substitute.For<IStationControl>();
         }
 
         [Test]
         public void IsDetected_true()
         {
-            _uut.SimulateIdReading(5);
-            _stationControl.Received().RfidConnected();
+            _uut.checkId(5);
         }
 
     
