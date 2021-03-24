@@ -3,7 +3,7 @@
     static void Main(string[] args)
     {
         // Assemble your system here from all the classes
-
+        /*
         bool finish = false;
         do
         {
@@ -19,11 +19,11 @@
                     break;
 
                 case 'O':
-                    door.OnDoorOpen();
+                    door.UnlockDoor();
                     break;
 
                 case 'C':
-                    door.OnDoorClose();
+                    door.LockDoor();
                     break;
 
                 case 'R':
@@ -39,5 +39,7 @@
             }
 
         } while (!finish);
+        */
     }
+        
 }

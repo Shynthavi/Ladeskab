@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Ladeskabsystem;
 
-namespace Ladeskabsystem.Test
+namespace Ladeskabsystem.Test.Unit
 {
     [TestFixture]
     public class TestUsbChargerSimulator

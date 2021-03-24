@@ -8,20 +8,42 @@ namespace Ladeskabssystem.Test.Unit
     [TestFixture]
     public class TestChargeControl
     {
-        private ChargeControl uut;
+        private ChargeControl _uut;
         private IUsbCharger _charger;
 
         [SetUp]
         public void Setup()
         {
             _charger = Substitute.For<IUsbCharger>();
-            uut = new ChargeControl(_charger);
+            _uut = new ChargeControl(_charger);
         }
 
         [Test]
-        public void Test1()
+        public void IsConnectedTrue()
         {
-            Assert.Pass();
+            _charger.Connected.Returns(true);
+            Assert.That(_uut.IsConnected(), Is.EqualTo(true));
+        }
+
+        [Test]
+        public void IsConnectedFalse()
+        {
+            _charger.Connected.Returns(false);
+            Assert.That(_uut.IsConnected(), Is.EqualTo(true));
+        }
+
+        [Test]
+        public void StartChargeTest()
+        {
+            _uut.StartCharge();
+            _charger.Received().StartCharge();
+        }
+
+        [Test]
+        public void StopChargeTest()
+        {
+            _uut.StopCharge();
+            _charger.Received().StopCharge();
         }
     }
 }
