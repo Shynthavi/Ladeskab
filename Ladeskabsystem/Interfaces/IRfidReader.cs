@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Ladeskabsystem
+namespace Ladeskabsystem.Interfaces
 {
     public class RfidEventArgs : EventArgs
     {
