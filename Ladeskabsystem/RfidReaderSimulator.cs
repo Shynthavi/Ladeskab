@@ -20,7 +20,7 @@ namespace Ladeskabsystem
 
         public void SimulateIdReading(int id)
         {
-            _stationControl.RFidConnected(_id);
+            _stationControl.RfidDetected(_id);
         }
 
         public void OnNewRfid(RfidEventArgs e)
