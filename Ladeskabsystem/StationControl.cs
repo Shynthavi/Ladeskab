@@ -83,5 +83,14 @@ namespace Ladeskabsystem
         }
 
         // Her mangler de andre trigger handlere
+        public void DoorOpened() 
+        {
+
+        }
+
+        public void DoorClosed()
+        {
+
+        }
     }
 }
