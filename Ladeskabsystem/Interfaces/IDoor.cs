@@ -4,19 +4,12 @@ using System.Text;
 
 namespace Ladeskabsystem.Interfaces
 {
-    public class DoorStatusEventArgs : EventArgs
-    {
-        public bool Door { set; get; }
-    }
-
     public interface IDoor
     {
-
         event EventHandler<DoorStatusEventArgs> DoorStatusEvent;
-
+        bool DoorIsOpen { get; }
+        bool DoorIsClosed { get; }
         void LockDoor();
-
         void UnlockDoor();
-
     }
 }
