@@ -8,6 +8,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ladeskabsystem", "Ladeskabsystem\Ladeskabsystem.csproj", "{4CE51BDD-E664-4BDE-8DB6-C35E913D83EB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ladeskabssystem.Test.Unit", "Ladeskabssystem.Test.Unit\Ladeskabssystem.Test.Unit.csproj", "{BE464A20-89CF-41E8-93D4-C018CACBA7B4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4CE51BDD-E664-4BDE-8DB6-C35E913D83EB} = {4CE51BDD-E664-4BDE-8DB6-C35E913D83EB}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
