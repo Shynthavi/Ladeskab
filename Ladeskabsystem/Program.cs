@@ -31,7 +31,7 @@
                     string idString = System.Console.ReadLine();
 
                     int id = Convert.ToInt32(idString);
-                    rfidReader.OnRfidRead(id);
+                    rfidReader.SimulateIdReading(id);
                     break;
 
                 default:
@@ -41,5 +41,5 @@
         } while (!finish);
         */
     }
-        
+
 }

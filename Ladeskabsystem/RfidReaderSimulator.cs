@@ -8,25 +8,19 @@ namespace Ladeskabsystem
 {
     public class RfidReaderSimulator : IRfidReader
     {
+        private IStationControl _stationControl;
+        public RfidReaderSimulator(IStationControl StationControl)
+        {
+            _stationControl = StationControl;
+        }
         public event EventHandler<RfidEventArgs> RfidEvent;
 
         private int _id;
 
-        public int Id
+
+        public void SimulateIdReading(int id)
         {
-            get { return _id; }
-            set
-            {
-                if (value > 0)
-                {
-                    OnNewRfid(new RfidEventArgs{isDetected = true});
-                    _id = value;
-                }
-                else
-                {
-                    OnNewRfid(new RfidEventArgs { isDetected = false });
-                }
-            }
+            _stationControl.RFidConnected(_id);
         }
 
         public void OnNewRfid(RfidEventArgs e)

@@ -7,6 +7,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Ladeskabsystem;
 using Ladeskabsystem.Interfaces;
+using NSubstitute;
+using NSubstitute.ReceivedExtensions;
 using NUnit.Framework.Constraints;
 
 namespace Ladeskabssystem.Test.Unit
@@ -15,28 +17,21 @@ namespace Ladeskabssystem.Test.Unit
     public class TestRfidReaderSimulator
     {
         private RfidReaderSimulator _uut;
-        private RfidEventArgs _receivedEventArgs;
+        private IStationControl _stationControl;
 
         public void Setup()
         {
             _uut = new RfidReaderSimulator();
+            _stationControl = Substitute.For<IStationControl>();
         }
 
         [Test]
         public void IsDetected_true()
         {
-            _uut.Id = 2;
-            Assert.That(_receivedEventArgs.isDetected, Is.True);
+            _uut.SimulateIdReading(5);
+            _stationControl.Received().RfidConnected();
         }
 
-        [Test]
-        public void IsDetected_false()
-        {
-            _uut.Id = -10;
-            Assert.That(_receivedEventArgs.isDetected, Is.False);
-        }
-
-        [Test]
-        public void IdIsReceived() { }
+    
     }
 }
