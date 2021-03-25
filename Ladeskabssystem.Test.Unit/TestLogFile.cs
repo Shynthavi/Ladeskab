@@ -23,6 +23,7 @@ namespace Ladeskabssystem.Test.Unit
         public void Setup()
         {
             _uut = new LogFile();
+            
         }
 
         [Test]
