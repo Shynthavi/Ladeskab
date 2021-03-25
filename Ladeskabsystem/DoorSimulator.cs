@@ -10,6 +10,11 @@ namespace Ladeskabsystem
     }
     public class DoorSimulator : IDoor
     {
+        public DoorSimulator()
+        {
+            DoorIsOpen = false;
+            DoorIsClosed = false;
+        }
         public event EventHandler<DoorStatusEventArgs> DoorStatusEvent;
         public bool DoorIsOpen
         {
@@ -20,12 +25,6 @@ namespace Ladeskabsystem
         { 
             get; 
             private set; 
-        }
-
-        public DoorSimulator()
-        {
-            DoorIsOpen = false;
-            DoorIsClosed = false;
         }
 
         public void OpenDoor()
