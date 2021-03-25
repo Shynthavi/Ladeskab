@@ -7,14 +7,9 @@ namespace Ladeskabsystem
 {
     class Display : IDisplay
     {
-        public void ShowStationMessage()
+        public void ShowMessage(string s)
         {
-            throw new NotImplementedException();
-        }
-
-        public void ShowChargerMessage()
-        {
-            throw new NotImplementedException();
+            Console.WriteLine(s);
         }
     }
 }

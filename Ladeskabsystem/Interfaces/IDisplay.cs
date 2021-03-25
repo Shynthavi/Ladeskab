@@ -2,7 +2,6 @@
 {
     public interface IDisplay
     {
-        void ShowStationMessage();
-        void ShowChargerMessage();
+        void ShowMessage(string s);
     }
 }
