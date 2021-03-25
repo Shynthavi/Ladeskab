@@ -32,7 +32,6 @@ namespace Ladeskabssystem.Test.Unit
             _uut.LogDoorLocked(id);
             string [] loadfile = File.ReadAllLines(Logfile + "Logfile.txt");
             Assert.That(loadfile[loadfile.Length - 1], Is.EqualTo("Door locked " + id));
-
         }
 
         [Test]

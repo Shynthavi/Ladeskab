@@ -34,21 +34,21 @@ namespace Ladeskabssystem.Test.Unit
         [Test]
         public void IsDetected_true()
         {
-            _uut.checkId(2);
+            _uut.SimulateReading(2);
             Assert.That(_RfidEventArgs,Is.Not.Null);
         }
 
         [Test]
         public void CorrectIdIsDetected()
         {
-            _uut.checkId(7);
+            _uut.SimulateReading(7);
             Assert.That(_RfidEventArgs.Id,Is.EqualTo(7));
         }
 
         [Test]
         public void InvalidIdDetected()
         {
-            Assert.That(() =>_uut.checkId(-7), Throws.TypeOf<ArgumentOutOfRangeException>());
+            Assert.That(() =>_uut.SimulateReading(-7), Throws.TypeOf<ArgumentOutOfRangeException>());
         }
         
     }

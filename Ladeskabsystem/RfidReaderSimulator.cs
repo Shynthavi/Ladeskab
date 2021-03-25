@@ -17,7 +17,7 @@ namespace Ladeskabsystem
   
         public event EventHandler<RfidEventArgs> RfidEvent;
 
-        public void checkId(int id)
+        public void SimulateReading(int id)
         {
             if (0 < id)
             {

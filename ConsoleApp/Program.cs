@@ -45,7 +45,7 @@ class Program
                     string idString = System.Console.ReadLine();
 
                     int id = Convert.ToInt32(idString);
-                    rfidReader.checkId(id);
+                    rfidReader.SimulateReading(id);
                     break;
 
                 default:
