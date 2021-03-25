@@ -9,3 +9,5 @@
 25-03-2021 18:07:08: Skab låst med RFID: 14
 25-03-2021 18:07:08: Skab låst med RFID: 14
 25-03-2021 18:07:08: Skab låst op med RFID: 14
+25-03-2021 20:48:58: Skab låst med RFID: 5
+25-03-2021 20:52:11: Skab låst op med RFID: 14
