@@ -41,9 +41,11 @@ namespace Ladeskabssystem.Test.Unit
         [Test]
         public void LogDoorLock()
         {
+            int Id = 14;
+            _rfidReader.SimulateReading(Id);
             string path = Directory.GetCurrentDirectory();
             int LogLength = File.ReadAllText(path+@"\logfile.txt").Length;
-            int Id = 14;
+            
 
             _chargeControl.IsConnected().Returns(true);
             _rfidReader.SimulateReading(Id);
@@ -57,8 +59,10 @@ namespace Ladeskabssystem.Test.Unit
         [Test]
         public void LogDoorUnlock()
         {
-            string path = Directory.GetCurrentDirectory();
             int Id = 14;
+            _rfidReader.SimulateReading(Id);
+            string path = Directory.GetCurrentDirectory();
+            
 
             _chargeControl.IsConnected().Returns(true);
             
