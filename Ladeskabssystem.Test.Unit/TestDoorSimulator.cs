@@ -9,43 +9,37 @@ namespace Ladeskabsystem.Test.Unit
     public class TestDoorSimulator
     {
         private DoorSimulator _uut;
-        private DoorStatusEventArgs _receivedEvent;
+        private DoorOpenedEventArgs _receivedEvent;
 
         [SetUp]
         public void Setup()
         {
+            _receivedEvent = null;
             _uut = new DoorSimulator();
-            _uut.OpenLockedDoor(true);
-            _uut.DoorStatusEvent += ((o, args) => { _receivedEvent = args; });
+            _uut.OpenDoor(true);
+            _uut.DoorOpenEvent += ((o, args) => { _receivedEvent = args; });
+            
+        }
+
+        [Test]
+        public void DoorNewValueReceived_Test()
+        {
+            _uut.OpenDoor(false);
+            Assert.That(_receivedEvent.OpenDoor, Is.EqualTo(false));
         }
 
         [Test]
         public void LockDoorOutput_Test()
         {
-            _uut.OpenLockedDoor(false);
-            Assert.That(_uut.LockDoor, Is.EqualTo("Dør er låst"));
+            _uut.LockDoor();
+            Assert.That(_uut.UnlockDoor, Is.EqualTo("Dør er ulåst"));
         }
 
         [Test]
         public void UnLockDoorOutput_Test()
         {
-            _uut.OpenLockedDoor(false);
+            _uut.UnlockDoor();
             Assert.That(_uut.UnlockDoor, Is.EqualTo("Dør er ulåst"));
         }
-
-        [Test]
-        public void DoorIsUnlocked_Test()
-        {
-            _uut.OpenLockedDoor(true);
-            Assert.That(_uut.UnlockDoor, Is.True);
-        }
-
-        [Test]
-        public void DoorIsLocked_Test()
-        {
-            _uut.OpenLockedDoor(true);
-            Assert.That(_uut.LockDoor, Is.True);
-        }
-
     }
 }
