@@ -20,6 +20,7 @@ namespace Ladeskabssystem.Test.Unit
 
         private RfidEventArgs _RfidEventArgs;
 
+        [SetUp]
         public void Setup()
         {
             _uut = new RfidReaderSimulator();
@@ -31,9 +32,10 @@ namespace Ladeskabssystem.Test.Unit
         }
 
         [Test]
-        public void IsDetected_true(int Id)
+        public void IsDetected_true()
         {
-            _uut.checkId(5);
+         
+            _uut.checkId(2);
             Assert.That(_RfidEventArgs,Is.Not.Null);
 
            
