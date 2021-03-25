@@ -6,57 +6,31 @@ namespace Ladeskabsystem
 {
     public class DoorStatusEventArgs : EventArgs
     {
-        public bool Doors { set; get; }
+        public bool OpenDoor { set; get; }
     }
     public class DoorSimulator : IDoor
     {
-        public DoorSimulator()
-        {
-            DoorIsOpen = false;
-            DoorIsClosed = false;
-        }
         public event EventHandler<DoorStatusEventArgs> DoorStatusEvent;
-        public bool DoorIsOpen
-        {
-            get;
-            private set;
-        }
-        public bool DoorIsClosed
-        { 
-            get; 
-            private set; 
-        }
+        
 
-        public void OpenDoor()
+
+        public void OpenLockedDoor(bool OpenDoor_)
         {
-            if (DoorIsOpen == true)
-                return;
-            DoorIsOpen = true;
-            OnNewDoorStatus(new DoorStatusEventArgs() { Doors = DoorIsOpen });
+            OnNewDoorStatus(new DoorStatusEventArgs() { OpenDoor = OpenDoor_ });
         }
-        public void CloseDoor()
-        {
-            if (DoorIsClosed == true)
-                return;
-            DoorIsClosed = true;
-            OnNewDoorStatus(new DoorStatusEventArgs() { Doors = DoorIsClosed });
-        }
+        
 
         public void LockDoor()
         {
-            if (DoorIsOpen == true || DoorIsClosed == true)
-                return;
-            DoorIsClosed = true;
+            Console.WriteLine("Dør er låst");
         
         }
         public void UnlockDoor()
         {
-            if (DoorIsOpen == true || DoorIsClosed == false)
-                return;
-            DoorIsClosed = false;
+            Console.WriteLine("Dør er ulåst");
         }
 
-        private void OnNewDoorStatus(DoorStatusEventArgs e)
+        protected virtual void OnNewDoorStatus(DoorStatusEventArgs e)
         {
             DoorStatusEvent?.Invoke(this, e);
         }
