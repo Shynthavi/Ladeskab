@@ -4,7 +4,7 @@ using Ladeskabsystem.Interfaces;
 
 namespace Ladeskabsystem
 {
-    
+
     public class DoorOpenedEventArgs : EventArgs
     {
         public bool OpenDoor { set; get; }
@@ -19,6 +19,8 @@ namespace Ladeskabsystem
         public event EventHandler<DoorOpenedEventArgs> DoorOpenEvent;
         public event EventHandler<DoorClosedEventArgs> DoorCloseEvent;
 
+        public string DoorSimulatorString { get; private set; }
+
         public void OpenDoor(bool OpenDoor_)
         {
             OnNewOpenDoorStatus(new DoorOpenedEventArgs() { OpenDoor = OpenDoor_ });
@@ -32,12 +34,14 @@ namespace Ladeskabsystem
 
         public void LockDoor()
         {
-            Console.WriteLine("Dør er låst");
-        
+            DoorSimulatorString = "Dør er låst";
+            Console.WriteLine(DoorSimulatorString);
+
         }
         public void UnlockDoor()
         {
-            Console.WriteLine("Dør er ulåst");
+            DoorSimulatorString = "Dør er ulåst";
+            Console.WriteLine(DoorSimulatorString);
         }
 
         protected virtual void OnNewOpenDoorStatus(DoorOpenedEventArgs e)
