@@ -18,7 +18,7 @@ namespace Ladeskabsystem
             }
         }
 
-        public void LogDoorUnLocked(int id)
+        public void LogDoorUnlocked(int id)
         {
             using (var writer = File.AppendText(Logfile))
             {
