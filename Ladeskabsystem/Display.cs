@@ -5,7 +5,7 @@ using Ladeskabsystem.Interfaces;
 
 namespace Ladeskabsystem
 {
-    class Display : IDisplay
+    public class Display : IDisplay
     {
         public void ShowMessage(string s)
         {
