@@ -59,9 +59,10 @@ namespace Ladeskabssystem.Test.Unit
             int Id = 14;
 
             _chargeControl.IsConnected().Returns(true);
+            
+            _rfidReader.SimulateReading(Id);
             int LogLength = File.ReadAllText(@"C:\Users\Lucas\Desktop\Aarhus_Universitet\IKT\4. Semester\SWT\Github\Ladeskab\Ladeskabssystem.Test.Unit\bin\Debug\netcoreapp3.1\logfile.txt").Length;
             _rfidReader.SimulateReading(Id);
-
             int newLogLength = File.ReadAllText(@"C:\Users\Lucas\Desktop\Aarhus_Universitet\IKT\4. Semester\SWT\Github\Ladeskab\Ladeskabssystem.Test.Unit\bin\Debug\netcoreapp3.1\logfile.txt").Length;
             Assert.That(newLogLength, Is.GreaterThan(LogLength));
 
