@@ -41,29 +41,31 @@ namespace Ladeskabssystem.Test.Unit
         [Test]
         public void LogDoorLock()
         {
-            int LogLength = File.ReadAllText(@"C:\Users\Lucas\Desktop\Aarhus_Universitet\IKT\4. Semester\SWT\Github\Ladeskab\Ladeskabssystem.Test.Unit\bin\Debug\netcoreapp3.1\logfile.txt").Length;
+            string path = Directory.GetCurrentDirectory();
+            int LogLength = File.ReadAllText(path+@"\logfile.txt").Length;
             int Id = 14;
 
             _chargeControl.IsConnected().Returns(true);
             _rfidReader.SimulateReading(Id);
-            
-            int newLogLength = File.ReadAllText(@"C:\Users\Lucas\Desktop\Aarhus_Universitet\IKT\4. Semester\SWT\Github\Ladeskab\Ladeskabssystem.Test.Unit\bin\Debug\netcoreapp3.1\logfile.txt").Length;
-            Assert.That(newLogLength,Is.GreaterThan(LogLength));
+
+            int newLogLength = File.ReadAllText(path + @"\logfile.txt").Length;
+            Assert.That(newLogLength, Is.GreaterThan(LogLength));
 
         }
-
+        
 
         [Test]
         public void LogDoorUnlock()
         {
+            string path = Directory.GetCurrentDirectory();
             int Id = 14;
 
             _chargeControl.IsConnected().Returns(true);
             
             _rfidReader.SimulateReading(Id);
-            int LogLength = File.ReadAllText(@"C:\Users\Lucas\Desktop\Aarhus_Universitet\IKT\4. Semester\SWT\Github\Ladeskab\Ladeskabssystem.Test.Unit\bin\Debug\netcoreapp3.1\logfile.txt").Length;
-            _rfidReader.SimulateReading(Id);
-            int newLogLength = File.ReadAllText(@"C:\Users\Lucas\Desktop\Aarhus_Universitet\IKT\4. Semester\SWT\Github\Ladeskab\Ladeskabssystem.Test.Unit\bin\Debug\netcoreapp3.1\logfile.txt").Length;
+            int LogLength = File.ReadAllText(path+@"\logfile.txt").Length;
+          _rfidReader.SimulateReading(Id);
+            int newLogLength = File.ReadAllText(path + @"\logfile.txt").Length;
             Assert.That(newLogLength, Is.GreaterThan(LogLength));
 
         }
