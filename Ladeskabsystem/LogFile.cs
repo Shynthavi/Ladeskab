@@ -9,7 +9,7 @@ namespace Ladeskabsystem
     public class LogFile : ILogFile
     {
         private string Logfile = "Logfile.txt";
-        public void WriteToLogLocked(int id)
+        public void LogDoorLocked(int id)
         {
 
             using (var writer = File.AppendText(Logfile))
@@ -18,7 +18,7 @@ namespace Ladeskabsystem
             }
         }
 
-        public void WriteToLogUnlocked(int id)
+        public void LogDoorUnLocked(int id)
         {
             using (var writer = File.AppendText(Logfile))
             {
