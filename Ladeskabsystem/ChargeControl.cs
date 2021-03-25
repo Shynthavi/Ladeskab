@@ -6,11 +6,24 @@ namespace Ladeskabsystem
     public class ChargeControl : IChargeControl
     {
         private IUsbCharger charger_;
+        private bool _fullyCharged = false;
+        private ChargingState  _state;
+
+        private enum ChargingState
+        {
+            NoConnection,
+            Charging,
+            FullyCharged,
+            ChargingError
+        };
+
 
         public ChargeControl(IUsbCharger charger)
         {
             charger_ = charger;
         }
+
+
 
         public bool IsConnected()
         {
@@ -26,5 +39,18 @@ namespace Ladeskabsystem
         {
             charger_.StopCharge();
         }
+
+        private void ChargingCurrentValue(object sender, RfidEventArgs e)
+        {
+            switch (_state)
+            {
+                case ChargingState.NoConnection
+                {
+
+                }
+            }
+
+        }
+
     }
 }
