@@ -11,7 +11,7 @@ class Program
         DoorSimulator door = new DoorSimulator();
         Display display = new Display();
         UsbChargerSimulator UsbCharger = new UsbChargerSimulator();
-        ChargeControl charger = new ChargeControl(UsbCharger);
+        ChargeControl charger = new ChargeControl(UsbCharger,display);
         RfidReaderSimulator rfidReader = new RfidReaderSimulator();
         LogFile log = new LogFile();
         StationControl station = new StationControl(charger, door, display, rfidReader, log);
