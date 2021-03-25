@@ -18,15 +18,13 @@ namespace Ladeskabsystem.Test.Unit
         [Test]
         public void DoorIsOpen_Test()
         {
-            //_uut.(true);
-            Assert.That(_uut.LockDoor, Is.False);
+            Assert.That(_uut.OpenDoor, Is.True);
         }
 
         [Test]
         public void DoorIsClosed_Test()
         {
-            //_uut.UnlockDoor(false);
-            Assert.That(_uut.LockDoor, Is.True);
+            Assert.That(_uut.OpenDoor, Is.False);
         }
     }
 }
