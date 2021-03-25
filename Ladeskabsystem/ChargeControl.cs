@@ -8,6 +8,7 @@ namespace Ladeskabsystem
         private IUsbCharger charger_;
         private bool _fullyCharged = false;
         private ChargingState  _state;
+        private IDisplay _display;
 
         private enum ChargingState
         {
@@ -18,9 +19,11 @@ namespace Ladeskabsystem
         };
 
 
-        public ChargeControl(IUsbCharger charger)
+        public ChargeControl(IUsbCharger charger, IDisplay display)
         {
             charger_ = charger;
+            _display = display;
+            charger_.CurrentValueEvent += ChargingCurrentValue;
         }
 
 
@@ -40,14 +43,38 @@ namespace Ladeskabsystem
             charger_.StopCharge();
         }
 
-        private void ChargingCurrentValue(object sender, RfidEventArgs e)
+        private void ChargingCurrentValue(object sender, CurrentEventArgs e)
         {
+            if (e.Current == 0)
+                _state = ChargingState.NoConnection;
+            else if (e.Current <= 5)
+                _state = ChargingState.FullyCharged;
+            else if (e.Current>5 && e.Current  <= 500)
+                _state = ChargingState.Charging;
+            else if (e.Current > 500)
+                _state = ChargingState.ChargingError;
+
             switch (_state)
             {
-                case ChargingState.NoConnection
-                {
+                case ChargingState.NoConnection:
+                    _display.ShowMessage("Din telefon er ikke ordentlig tilsluttet. Prøv igen.");
 
-                }
+                    break;
+
+                case ChargingState.Charging:
+                    _display.ShowMessage("Din telefon oplades.");
+
+                    break;
+
+                case ChargingState.FullyCharged:
+                    _display.ShowMessage("Din telefon er fuldt opladt.");
+
+                    break;
+
+                case ChargingState.ChargingError:
+                    _display.ShowMessage("Error: Prøv igen.");
+
+                    break;
             }
 
         }
