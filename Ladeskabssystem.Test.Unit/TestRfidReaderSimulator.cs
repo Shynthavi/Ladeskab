@@ -18,15 +18,25 @@ namespace Ladeskabssystem.Test.Unit
     {
         private RfidReaderSimulator _uut;
 
+        private RfidEventArgs _RfidEventArgs;
+
         public void Setup()
         {
             _uut = new RfidReaderSimulator();
+            _uut.RfidEvent +=
+                (o, args) =>
+                {
+                    _RfidEventArgs = args;
+                };
         }
 
         [Test]
-        public void IsDetected_true()
+        public void IsDetected_true(int Id)
         {
             _uut.checkId(5);
+            Assert.That(_RfidEventArgs,Is.Not.Null);
+
+           
         }
 
     
