@@ -13,8 +13,9 @@ class Program
         UsbChargerSimulator UsbCharger = new UsbChargerSimulator();
         ChargeControl charger = new ChargeControl(UsbCharger);
         RfidReaderSimulator rfidReader = new RfidReaderSimulator();
-        StationControl station = new StationControl(charger, door, display, rfidReader);
         LogFile log = new LogFile();
+        StationControl station = new StationControl(charger, door, display, rfidReader, log);
+
 
 
 

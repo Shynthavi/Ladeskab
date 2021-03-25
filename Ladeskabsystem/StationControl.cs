@@ -27,7 +27,7 @@ namespace Ladeskabsystem
         private IRfidReader _reader;
         private ILogFile _log;
 
-        private string logFile = "logfile.txt"; // Navnet på systemets log-fil
+        //private string logFile = "logfile.txt"; // Navnet på systemets log-fil
 
         // Her mangler constructor
         public StationControl(IChargeControl charger, IDoor door, IDisplay display, IRfidReader reader, ILogFile log)

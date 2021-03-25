@@ -20,7 +20,7 @@ namespace Ladeskabssystem.Test.Unit
     public class TestLogFile
     {
         private LogFile _uut;
-        private string Logfile = "Logfile.txt";
+        //private string Logfile = "Logfile.txt";
         private RfidReaderSimulator _rfidReader;
         private IDoor _iDoor;
         private IChargeControl _chargeControl;
