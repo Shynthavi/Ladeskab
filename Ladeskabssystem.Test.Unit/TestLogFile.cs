@@ -35,7 +35,7 @@ namespace Ladeskabssystem.Test.Unit
             _iDoor = Substitute.For<IDoor>();
             _chargeControl = Substitute.For<IChargeControl>();
             _iDisplay = Substitute.For<IDisplay>();
-            _stationControl = new StationControl(_chargeControl, _iDoor, _iDisplay, _rfidReader);
+            _stationControl = new StationControl(_chargeControl, _iDoor, _iDisplay, _rfidReader, _uut);
         }
 
         [Test]

@@ -25,16 +25,18 @@ namespace Ladeskabsystem
         private IDoor _door;
         private IDisplay _display;
         private IRfidReader _reader;
+        private ILogFile _log;
 
         private string logFile = "logfile.txt"; // Navnet på systemets log-fil
 
         // Her mangler constructor
-        public StationControl(IChargeControl charger, IDoor door, IDisplay display, IRfidReader reader)
+        public StationControl(IChargeControl charger, IDoor door, IDisplay display, IRfidReader reader, ILogFile log)
         {
             _charger = charger;
             _door = door;
             _display = display;
             _reader = reader;
+            _log = log;
 
             _door.DoorOpenEvent += DoorOpened;
             _door.DoorCloseEvent += DoorClosed;
@@ -53,10 +55,12 @@ namespace Ladeskabsystem
                         _door.LockDoor();
                         _charger.StartCharge();
                         _oldId = e.Id;
-                        using (var writer = File.AppendText(logFile))
-                        {
-                            writer.WriteLine(DateTime.Now + ": Skab låst med RFID: {0}", e.Id);
-                        }
+                        
+                        _log.LogDoorLocked(e.Id);
+                        //using (var writer = File.AppendText(logFile))
+                        //{
+                        //    writer.WriteLine(DateTime.Now + ": Skab låst med RFID: {0}", e.Id);
+                        //}
 
                         _display.ShowMessage("Skabet er låst og din telefon lades. Brug dit RFID tag til at låse op.");
                         _state = LadeskabState.Locked;
@@ -78,10 +82,13 @@ namespace Ladeskabsystem
                     {
                         _charger.StopCharge();
                         _door.UnlockDoor();
-                        using (var writer = File.AppendText(logFile))
-                        {
-                            writer.WriteLine(DateTime.Now + ": Skab låst op med RFID: {0}", e.Id);
-                        }
+
+                        _log.LogDoorUnlocked(e.Id);
+
+                        //using (var writer = File.AppendText(logFile))
+                        //{
+                        //    writer.WriteLine(DateTime.Now + ": Skab låst op med RFID: {0}", e.Id);
+                        //}
 
                         _display.ShowMessage("Tag din telefon ud af skabet og luk døren");
                         _state = LadeskabState.Available;
