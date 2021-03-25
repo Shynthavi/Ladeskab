@@ -6,9 +6,8 @@ namespace Ladeskabsystem.Interfaces
 {
     public interface IDoor
     {
-        event EventHandler<DoorStatusEventArgs> DoorStatusEvent;
-        bool DoorIsOpen { get; }
-        bool DoorIsClosed { get; }
+        public event EventHandler<DoorOpenedEventArgs> DoorOpenEvent;
+        public event EventHandler<DoorClosedEventArgs> DoorCloseEvent;
         void LockDoor();
         void UnlockDoor();
     }

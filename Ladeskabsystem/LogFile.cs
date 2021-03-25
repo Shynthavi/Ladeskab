@@ -8,11 +8,11 @@ namespace Ladeskabsystem
 {
     public class LogFile : ILogFile
     {
-        private string Logfile = "Logfile.txt";
+        private string logFile = "logfile.txt";
         public void LogDoorLocked(int id)
         {
 
-            using (var writer = File.AppendText(Logfile))
+            using (var writer = File.AppendText(logFile))
             {
                 writer.WriteLine(DateTime.Now + ": Skab låst med RFID: {0}", id);
             }
@@ -20,7 +20,7 @@ namespace Ladeskabsystem
 
         public void LogDoorUnlocked(int id)
         {
-            using (var writer = File.AppendText(Logfile))
+            using (var writer = File.AppendText(logFile))
             {
                 writer.WriteLine(DateTime.Now + ": Skab låst op med RFID: {0}", id);
             }

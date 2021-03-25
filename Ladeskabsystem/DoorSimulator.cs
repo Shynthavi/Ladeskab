@@ -4,62 +4,49 @@ using Ladeskabsystem.Interfaces;
 
 namespace Ladeskabsystem
 {
-    public class DoorStatusEventArgs : EventArgs
+    
+    public class DoorOpenedEventArgs : EventArgs
     {
-        public bool Doors { set; get; }
+        public bool OpenDoor { set; get; }
     }
+    public class DoorClosedEventArgs : EventArgs
+    {
+        public bool CloseDoor { set; get; }
+    }
+
     public class DoorSimulator : IDoor
     {
-        public DoorSimulator()
+        public event EventHandler<DoorOpenedEventArgs> DoorOpenEvent;
+        public event EventHandler<DoorClosedEventArgs> DoorCloseEvent;
+
+        public void OpenDoor(bool OpenDoor_)
         {
-            DoorIsOpen = false;
-            DoorIsClosed = false;
-        }
-        public event EventHandler<DoorStatusEventArgs> DoorStatusEvent;
-        public bool DoorIsOpen
-        {
-            get;
-            private set;
-        }
-        public bool DoorIsClosed
-        { 
-            get; 
-            private set; 
+            OnNewOpenDoorStatus(new DoorOpenedEventArgs() { OpenDoor = OpenDoor_ });
         }
 
-        public void OpenDoor()
+        public void ClosedDoor(bool CloseDoor_)
         {
-            if (DoorIsOpen == true)
-                return;
-            DoorIsOpen = true;
-            OnNewDoorStatus(new DoorStatusEventArgs() { Doors = DoorIsOpen });
+            OnNewCloseDoorStatus(new DoorClosedEventArgs() { CloseDoor = CloseDoor_ });
         }
-        public void CloseDoor()
-        {
-            if (DoorIsClosed == true)
-                return;
-            DoorIsClosed = true;
-            OnNewDoorStatus(new DoorStatusEventArgs() { Doors = DoorIsClosed });
-        }
+
 
         public void LockDoor()
         {
-            if (DoorIsOpen == true || DoorIsClosed == true)
-                return;
-            DoorIsClosed = true;
+            Console.WriteLine("Dør er låst");
         
         }
         public void UnlockDoor()
         {
-            if (DoorIsOpen == true || DoorIsClosed == false)
-                return;
-            DoorIsClosed = false;
+            Console.WriteLine("Dør er ulåst");
         }
 
-        private void OnNewDoorStatus(DoorStatusEventArgs e)
+        protected virtual void OnNewOpenDoorStatus(DoorOpenedEventArgs e)
         {
-            DoorStatusEvent?.Invoke(this, e);
+            DoorOpenEvent?.Invoke(this, e);
         }
-
+        protected virtual void OnNewCloseDoorStatus(DoorClosedEventArgs e)
+        {
+            DoorCloseEvent?.Invoke(this, e);
+        }
     }
 }

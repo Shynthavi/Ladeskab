@@ -36,7 +36,8 @@ namespace Ladeskabsystem
             _display = display;
             _reader = reader;
 
-            _door.DoorStatusEvent += DoorChangedEvent;
+            _door.DoorOpenEvent += DoorOpened;
+            _door.DoorCloseEvent += DoorClosed;
             _reader.RfidEvent += RfidDetected;
         }
 
@@ -95,18 +96,29 @@ namespace Ladeskabsystem
         }
 
         // Her mangler de andre trigger handlere
-        private void DoorOpened() 
+        private void DoorOpened(object sender, DoorOpenedEventArgs e)
         {
-
+            if (_state == LadeskabState.Available)
+            {
+                if (e.OpenDoor)
+                {
+                    _state = LadeskabState.DoorOpen;
+                    _display.ShowMessage("Tilslut telefon");
+                }
+            }
         }
 
-        private void DoorClosed()
-        {
 
-        }
-
-        private void DoorChangedEvent(object sender, DoorStatusEventArgs e)
+        private void DoorClosed(object sender, DoorClosedEventArgs e)
         {
+            if (_state == LadeskabState.DoorOpen)
+            {
+                if (!e.CloseDoor)
+                {
+                    _state = LadeskabState.Available;
+                    _display.ShowMessage("Indlæs RFID");
+                }
+            }
         }
     }
 }
