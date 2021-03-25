@@ -22,14 +22,14 @@ namespace Ladeskabsystem.Test.Unit
         [Test]
         public void LockDoorOutput_Test()
         {
-            _uut.LockDoor();
+            _uut.OpenLockedDoor(false);
             Assert.That(_uut.LockDoor, Is.EqualTo("Dør er låst"));
         }
 
         [Test]
         public void UnLockDoorOutput_Test()
         {
-            _uut.UnlockDoor();
+            _uut.OpenLockedDoor(false);
             Assert.That(_uut.UnlockDoor, Is.EqualTo("Dør er ulåst"));
         }
 

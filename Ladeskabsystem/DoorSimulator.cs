@@ -4,21 +4,31 @@ using Ladeskabsystem.Interfaces;
 
 namespace Ladeskabsystem
 {
-    public class DoorStatusEventArgs : EventArgs
+    
+    public class DoorOpenedEventArgs : EventArgs
     {
         public bool OpenDoor { set; get; }
     }
+    public class DoorClosedEventArgs : EventArgs
+    {
+        public bool CloseDoor { set; get; }
+    }
+
     public class DoorSimulator : IDoor
     {
-        public event EventHandler<DoorStatusEventArgs> DoorStatusEvent;
-        
+        public event EventHandler<DoorOpenedEventArgs> DoorOpenEvent;
+        public event EventHandler<DoorClosedEventArgs> DoorCloseEvent;
 
-
-        public void OpenLockedDoor(bool OpenDoor_)
+        public void OpenDoor(bool OpenDoor_)
         {
-            OnNewDoorStatus(new DoorStatusEventArgs() { OpenDoor = OpenDoor_ });
+            OnNewOpenDoorStatus(new DoorOpenedEventArgs() { OpenDoor = OpenDoor_ });
         }
-        
+
+        public void ClosedDoor(bool CloseDoor_)
+        {
+            OnNewCloseDoorStatus(new DoorClosedEventArgs() { CloseDoor = CloseDoor_ });
+        }
+
 
         public void LockDoor()
         {
@@ -30,10 +40,13 @@ namespace Ladeskabsystem
             Console.WriteLine("Dør er ulåst");
         }
 
-        protected virtual void OnNewDoorStatus(DoorStatusEventArgs e)
+        protected virtual void OnNewOpenDoorStatus(DoorOpenedEventArgs e)
         {
-            DoorStatusEvent?.Invoke(this, e);
+            DoorOpenEvent?.Invoke(this, e);
         }
-
+        protected virtual void OnNewCloseDoorStatus(DoorClosedEventArgs e)
+        {
+            DoorCloseEvent?.Invoke(this, e);
+        }
     }
 }
