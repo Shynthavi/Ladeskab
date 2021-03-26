@@ -21,25 +21,27 @@ namespace Ladeskabsystem
 
         public string DoorSimulatorString { get; private set; }
 
-        public void OpenDoor(bool OpenDoor_)
-        {
-            OnNewOpenDoorStatus(new DoorOpenedEventArgs() { OpenDoor = OpenDoor_ });
-        }
+        //public void OpenDoor(bool OpenDoor_)
+        //{
+        //    OnNewOpenDoorStatus(new DoorOpenedEventArgs() { OpenDoor = OpenDoor_ });
+        //}
 
-        public void ClosedDoor(bool CloseDoor_)
-        {
-            OnNewCloseDoorStatus(new DoorClosedEventArgs() { CloseDoor = CloseDoor_ });
-        }
-
+        //public void ClosedDoor(bool CloseDoor_)
+        //{
+        //    OnNewCloseDoorStatus(new DoorClosedEventArgs() { CloseDoor = CloseDoor_ });
+        private bool OpenDoor_;
+        private bool CloseDoor_;
 
         public void LockDoor()
         {
+            OnNewOpenDoorStatus(new DoorOpenedEventArgs() { OpenDoor = OpenDoor_ });
             DoorSimulatorString = "Dør er låst";
             Console.WriteLine(DoorSimulatorString);
 
         }
         public void UnlockDoor()
         {
+            OnNewCloseDoorStatus(new DoorClosedEventArgs() { CloseDoor = CloseDoor_ });
             DoorSimulatorString = "Dør er ulåst";
             Console.WriteLine(DoorSimulatorString);
         }

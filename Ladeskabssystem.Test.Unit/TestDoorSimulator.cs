@@ -1,4 +1,5 @@
-﻿using Ladeskabsystem;
+﻿using System.Runtime.CompilerServices;
+using Ladeskabsystem;
 using Ladeskabsystem.Interfaces;
 using NSubstitute;
 using NUnit.Framework;
