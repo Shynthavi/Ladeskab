@@ -26,13 +26,13 @@ namespace Ladeskabsystem
         }
 
 
-        protected virtual void OnNewOpenDoorStatus(DoorStatusEventArgs d)
+        private void OnNewOpenDoorStatus(DoorStatusEventArgs e)
         {
-            DoorOpenEvent?.Invoke(this, d);
+            DoorOpenEvent?.Invoke(this, e);
         }
-        protected virtual void OnNewCloseDoorStatus(DoorStatusEventArgs d)
+        private void OnNewCloseDoorStatus(DoorStatusEventArgs e)
         {
-            DoorCloseEvent?.Invoke(this, d);
+            DoorCloseEvent?.Invoke(this, e);
         }
 
     }

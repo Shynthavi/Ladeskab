@@ -9,33 +9,38 @@ namespace Ladeskabsystem.Test.Unit
     [TestFixture]
     public class TestDoorSimulator
     {
-        //private DoorSimulator _uut;
-        //private DoorOpenedEventArgs _receivedEventArgsOpened;
-        //private DoorClosedEventArgs _receivedEventArgsClosed;
-        //private string testString;
+        private DoorSimulator _uut;
+        private DoorStatusEventArgs _receivedEventArgsOpened;
+        private DoorStatusEventArgs _receivedEventArgsClosed;
+        private string testString;
 
-        //[SetUp]
-        //public void Setup()
-        //{
-        //    _receivedEventArgsOpened = null;
-        //    _receivedEventArgsClosed = null;
+        [SetUp]
+        public void Setup()
+        {
+            _receivedEventArgsOpened = null;
+            _receivedEventArgsClosed = null;
 
-        //    _uut = new DoorSimulator();
-        //    _uut.OpenDoor(true);
-        //    _uut.DoorOpenEvent += ((o, args) => { _receivedEventArgsOpened = args; });
-
-        //    _uut.ClosedDoor(true);
-        //    _uut.DoorCloseEvent += ((o, args) => { _receivedEventArgsClosed = args; });
-        //}
+            _uut = new DoorSimulator();
+            _uut.DoorOpenEvent += ((o, args) => { _receivedEventArgsOpened = args; });
+            _uut.DoorCloseEvent += ((o, args) => { _receivedEventArgsClosed = args; });
+        }
 
 
 
-        //[Test]
-        //public void DoorOpenNewValueReceived__EventFired()
-        //{
-        //    _uut.OpenDoor(false);
-        //    Assert.That(_receivedEventArgsOpened.OpenDoor, Is.Not.Null);
-        //}
+        [Test]
+        public void LockDoor_ChangesState_EventFired()
+        {
+            _uut.UnlockDoor();
+            _uut.LockDoor();
+            Assert.That(_receivedEventArgsClosed, Is.Not.Null);
+        }
+
+        [Test]
+        public void UnlockDoor_ChangesState_EventFired()
+        {
+            _uut.UnlockDoor();
+            Assert.That(_receivedEventArgsOpened, Is.Not.Null);
+        }
 
         //[Test]
         //public void DoorOpenSetToNewValue_CorrectValueReceived()
@@ -50,34 +55,6 @@ namespace Ladeskabsystem.Test.Unit
         //    _uut.ClosedDoor(false);
         //    Assert.That(_receivedEventArgsClosed.CloseDoor, Is.Not.Null);
         //}
-
-        //[Test]
-        //public void DoorClosedSetToNewValue_CorrectValueReceived()
-        //{
-        //    _uut.ClosedDoor(false);
-        //    Assert.That(_receivedEventArgsClosed.CloseDoor, Is.EqualTo(false));
-        //}
-
-        //[Test]
-        //public void LockDoorOutput()
-        //{
-        //    testString = "Dør er låst";
-        //    _uut.LockDoor();
-
-        //    Assert.That(_uut.DoorSimulatorString, Is.EqualTo(testString));
-
-        //}
-
-        //[Test]
-        //public void UnlockDoorOutput()
-        //{
-        //    testString = "Dør er ulåst";
-        //    _uut.UnlockDoor();
-
-        //    Assert.That(_uut.DoorSimulatorString, Is.EqualTo(testString));
-
-        //}
-
 
     }
 }
