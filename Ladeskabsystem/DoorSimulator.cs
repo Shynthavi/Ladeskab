@@ -15,14 +15,13 @@ namespace Ladeskabsystem
         public event EventHandler<DoorStatusEventArgs> DoorOpenEvent;
         public event EventHandler<DoorStatusEventArgs> DoorCloseEvent;
 
-
         public void LockDoor()
         {
             OnNewCloseDoorStatus(new DoorStatusEventArgs() { DoorLocked = true });
         }
         public void UnlockDoor()
         {
-            OnNewOpenDoorStatus(new DoorStatusEventArgs() { DoorLocked = false});
+            OnNewOpenDoorStatus(new DoorStatusEventArgs() { DoorLocked = false });
         }
 
 

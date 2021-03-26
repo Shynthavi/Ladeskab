@@ -10,6 +10,7 @@ namespace Ladeskabsystem
         private ChargingState  _state;
         private IDisplay _display;
 
+        // Enum med tilstande ("states") svarende til tilstandsdiagrammet for klassen
         private enum ChargingState
         {
             NoConnection,
@@ -26,8 +27,6 @@ namespace Ladeskabsystem
             charger_.CurrentValueEvent += ChargingCurrentValue;
         }
 
-
-
         public bool IsConnected()
         {
             return charger_.Connected;
@@ -42,6 +41,8 @@ namespace Ladeskabsystem
         {
             charger_.StopCharge();
         }
+
+        //Triggerhandler for UsbCharger
 
         private void ChargingCurrentValue(object sender, CurrentEventArgs e)
         {

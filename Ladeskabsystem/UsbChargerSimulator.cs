@@ -24,6 +24,7 @@ namespace Ladeskabsystem
         private System.Timers.Timer _timer;
         private int _ticksSinceStart;
 
+        //Constructor
         public UsbChargerSimulator()
         {
             CurrentValue = 0.0;

@@ -18,7 +18,6 @@ namespace Ladeskabsystem
             DoorOpen
         };
 
-        // Her mangler flere member variable
         private LadeskabState _state;
         private IChargeControl _charger;
         private int _oldId;
@@ -27,9 +26,9 @@ namespace Ladeskabsystem
         private IRfidReader _reader;
         private ILogFile _log;
 
-        //private string logFile = "logfile.txt"; // Navnet på systemets log-fil
 
-        // Her mangler constructor
+
+        //Constructor
         public StationControl(IChargeControl charger, IDoor door, IDisplay display, IRfidReader reader, ILogFile log)
         {
             _charger = charger;
@@ -43,7 +42,8 @@ namespace Ladeskabsystem
             _reader.RfidEvent += RfidDetected;
         }
 
-        // Eksempel på event handler for eventet "RFID Detected" fra tilstandsdiagrammet for klassen
+        //Triggerhandler for RfidReader
+
         private void RfidDetected(object sender, RfidEventArgs e)
         {
             switch (_state)
@@ -93,7 +93,8 @@ namespace Ladeskabsystem
             }
         }
 
-        // Her mangler de andre trigger handlere
+        //Triggerhandlers for DoorSimulator
+
         private void DoorOpened(object sender, DoorStatusEventArgs e)
         {
             if (_state == LadeskabState.Available)
@@ -105,7 +106,6 @@ namespace Ladeskabsystem
                 }
             }
         }
-
 
         private void DoorClosed(object sender, DoorStatusEventArgs e)
         {

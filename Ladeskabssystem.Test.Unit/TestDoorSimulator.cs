@@ -12,7 +12,6 @@ namespace Ladeskabsystem.Test.Unit
         private DoorSimulator _uut;
         private DoorStatusEventArgs _receivedEventArgsOpened;
         private DoorStatusEventArgs _receivedEventArgsClosed;
-        private string testString;
 
         [SetUp]
         public void Setup()
@@ -41,20 +40,6 @@ namespace Ladeskabsystem.Test.Unit
             _uut.UnlockDoor();
             Assert.That(_receivedEventArgsOpened, Is.Not.Null);
         }
-
-        //[Test]
-        //public void DoorOpenSetToNewValue_CorrectValueReceived()
-        //{
-        //    _uut.OpenDoor(false);
-        //    Assert.That(_receivedEventArgsOpened.OpenDoor, Is.EqualTo(false));
-        //}
-
-        //[Test]
-        //public void DoorCloseNewValueReceived__EventFired()
-        //{
-        //    _uut.ClosedDoor(false);
-        //    Assert.That(_receivedEventArgsClosed.CloseDoor, Is.Not.Null);
-        //}
 
     }
 }

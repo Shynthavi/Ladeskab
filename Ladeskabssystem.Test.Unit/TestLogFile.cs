@@ -13,8 +13,7 @@ using NSubstitute.ReceivedExtensions;
 
 
 namespace Ladeskabssystem.Test.Unit
-{
-     
+{  
 
     [TestFixture]
     public class TestLogFile
@@ -34,7 +33,7 @@ namespace Ladeskabssystem.Test.Unit
             string path = Directory.GetCurrentDirectory();
             int LogLength = File.ReadAllText(path+@"\logfile.txt").Length;
             
-            _uut.LogDoorLocked(5);
+            _uut.LogDoorLocked(id);
 
             int newLogLength = File.ReadAllText(path + @"\logfile.txt").Length;
             Assert.That(newLogLength, Is.GreaterThan(LogLength));
