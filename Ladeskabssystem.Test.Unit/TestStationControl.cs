@@ -113,9 +113,9 @@ namespace Ladeskabssystem.Test.Unit
         {
             //Act + Arrange
             //Changing state: Available --> DoorOpen
-            const bool openDoor = true;
-            _door.DoorOpenEvent += Raise.EventWith(new DoorOpenedEventArgs() { OpenDoor = openDoor });
-            _chargeControl.IsConnected().Returns(false);
+            const bool locked = false;
+            _door.DoorOpenEvent += Raise.EventWith(new DoorStatusEventArgs() {DoorLocked = locked});
+            _chargeControl.IsConnected().Returns(true);
             const int id = 5;
             _reader.RfidEvent += Raise.EventWith(new RfidEventArgs() { Id = id });
 
@@ -134,71 +134,72 @@ namespace Ladeskabssystem.Test.Unit
         //Method under test: DoorOpen()
         //State: Available
         [Test]
-        public void DoorOpened_Available_OpenDoor()
+        public void DoorOpened_Available_UnlockedDoor()
         {
             //Act + Arrange
-            const bool openDoor= true;
-            _door.DoorOpenEvent += Raise.EventWith(new DoorOpenedEventArgs() { OpenDoor = openDoor });
+            const bool locked = false;
+            _door.DoorOpenEvent += Raise.EventWith(new DoorStatusEventArgs() { DoorLocked = locked });
 
             //Assert
             _display.Received().ShowMessage("Tilslut telefon");
         }
 
         [Test]
-        public void DoorOpened_Available_NoOpenDoor()
+        public void DoorOpened_Available_LockedDoor()
         {
             //Act + Arrange
-            const bool openDoor = false;
-            _door.DoorOpenEvent += Raise.EventWith(new DoorOpenedEventArgs() { OpenDoor = openDoor });
+            const bool locked = true;
+            _door.DoorOpenEvent += Raise.EventWith(new DoorStatusEventArgs() { DoorLocked = locked });
 
             //Assert
             _display.DidNotReceive().ShowMessage("Tilslut telefon");
         }
 
 
-        //***************************************************************************
-        //Method under test: DoorClosed()
-        //State: DoorOpen
+        ////***************************************************************************
+        ////Method under test: DoorClosed()
+        ////State: DoorOpen
         [Test]
-        public void DoorClosed_DoorOpen_NoCloseDoor()
+        public void DoorClosed_DoorOpen_DoorUnlocked()
         {
             //Act + Arrange
-            const bool openDoor = true;
+            bool locked = false;
             //Changing state: Available --> DoorOpen
-            _door.DoorOpenEvent += Raise.EventWith(new DoorOpenedEventArgs() { OpenDoor = openDoor });
+            _door.DoorOpenEvent += Raise.EventWith(new DoorStatusEventArgs() { DoorLocked = locked });
 
-            const bool closeDoor = false;
-            _door.DoorCloseEvent += Raise.EventWith(new DoorClosedEventArgs() { CloseDoor = closeDoor });
+            locked = true;
+            _door.DoorCloseEvent += Raise.EventWith(new DoorStatusEventArgs() { DoorLocked = locked });
 
             //Assert
             _display.Received().ShowMessage("Indlæs RFID");
         }
 
         [Test]
-        public void DoorClosed_DoorOpen_CloseDoor()
+        public void DoorClosed_DoorOpen_DoorLocked()
         {
             //Act + Arrange
-            const bool openDoor = true;
-            //Changing state: Available --> DoorOpen
-            _door.DoorOpenEvent += Raise.EventWith(new DoorOpenedEventArgs() { OpenDoor = openDoor });
+            bool locked = true;
+            //Trying to change state: Available --> DoorOpen
+            _door.DoorOpenEvent += Raise.EventWith(new DoorStatusEventArgs() { DoorLocked = locked});
 
-            const bool closeDoor = true;
-            _door.DoorCloseEvent += Raise.EventWith(new DoorClosedEventArgs() { CloseDoor = closeDoor });
+            //Changing state: Available --> DoorOpen
+            locked = false;
+            _door.DoorCloseEvent += Raise.EventWith(new DoorStatusEventArgs() { DoorLocked = locked});
 
             //Assert
             _display.DidNotReceive().ShowMessage("Indlæs RFID");
         }
 
 
-        //***************************************************************************
-        //Method under test: DoorClosed()
-        //State: Available
+        ////***************************************************************************
+        ////Method under test: DoorClosed()
+        ////State: Available
         [Test]
-        public void DoorClosed_Available_CloseDoor()
+        public void DoorClosed_Available_DoorLocked()
         {
             //Act + Arrange
-            const bool closeDoor = true;
-            _door.DoorCloseEvent += Raise.EventWith(new DoorClosedEventArgs() { CloseDoor = closeDoor });
+            const bool locked = true;
+            _door.DoorCloseEvent += Raise.EventWith(new DoorStatusEventArgs() { DoorLocked = locked });
 
             //Assert
             _display.DidNotReceive().ShowMessage("Indlæs RFID");
