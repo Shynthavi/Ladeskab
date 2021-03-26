@@ -42,11 +42,19 @@ class Program
                     break;
 
                 case 'R':
-                    System.Console.WriteLine("Indtast RFID id: ");
+                    System.Console.WriteLine("Indtast RFID id:            (Fungerer kun hvis tilstand = Available)");
                     string idString = System.Console.ReadLine();
 
-                    int id = Convert.ToInt32(idString);
-                    rfidReader.SimulateReading(id);
+                    try
+                    { 
+                        int id = Convert.ToInt32(idString);
+                        rfidReader.SimulateReading(id);
+                    }
+                    catch (FormatException)
+                    {
+                        Console.WriteLine("Vil du venligst indtaste et tal?");
+                    }
+
                     break;
 
                 default:
