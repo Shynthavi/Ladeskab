@@ -5,16 +5,7 @@ using Ladeskabsystem.Interfaces;
 namespace Ladeskabsystem
 {
 
-    //public class DoorOpenedEventArgs : EventArgs
-    //{
-    //    public bool OpenDoor { set; get; }
-    //}
-    //public class DoorClosedEventArgs : EventArgs
-    //{
-    //    public bool CloseDoor { set; get; }
-    //}
-
-    public class DoorStatusEventArgs : EventArgs
+    public class DoorStatusEventArgs:EventArgs
     {
         public bool DoorLocked { set; get; }
     }
@@ -35,13 +26,13 @@ namespace Ladeskabsystem
         }
 
 
-        protected virtual void OnNewOpenDoorStatus(DoorStatusEventArgs e)
+        protected virtual void OnNewOpenDoorStatus(DoorStatusEventArgs d)
         {
-            DoorOpenEvent?.Invoke(this, e);
+            DoorOpenEvent?.Invoke(this, d);
         }
-        protected virtual void OnNewCloseDoorStatus(DoorStatusEventArgs e)
+        protected virtual void OnNewCloseDoorStatus(DoorStatusEventArgs d)
         {
-            DoorCloseEvent?.Invoke(this, e);
+            DoorCloseEvent?.Invoke(this, d);
         }
 
     }
