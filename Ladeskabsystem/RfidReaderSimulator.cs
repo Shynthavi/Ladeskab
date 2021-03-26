@@ -29,7 +29,7 @@ namespace Ladeskabsystem
             }
         }
 
-        public void OnNewRfid(RfidEventArgs e)
+        private void OnNewRfid(RfidEventArgs e)
         {
             RfidEvent?.Invoke(this, e);
         }
