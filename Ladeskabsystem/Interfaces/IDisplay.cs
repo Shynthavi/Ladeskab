@@ -4,6 +4,4 @@
     {
         void ShowMessage(string s);
     }
-
-    //DISPLAYCOMMENT
 }
