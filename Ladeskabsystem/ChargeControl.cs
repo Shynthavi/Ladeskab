@@ -47,9 +47,9 @@ namespace Ladeskabsystem
         private void ChargingCurrentValue(object sender, CurrentEventArgs e)
         {
             // *** Equivalence partitions *** //
-            if (e.Current == 0)
+            if (e.Current <= 0)
                 _state = ChargingState.NoConnection;
-            else if (e.Current <= 5)
+            else if (e.Current>0 && e.Current <= 5)
                 _state = ChargingState.FullyCharged;
             else if (e.Current>5 && e.Current  <= 500)
                 _state = ChargingState.Charging;

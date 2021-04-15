@@ -48,11 +48,15 @@ namespace Ladeskabssystem.Test.Unit
             _charger.Received().StopCharge();
         }
 
-        [Test]
-        public void ChargingCurrentValue_NoConnection()
+        // *** Testing BVA for chargingCurrentValue NoConnection *** 
+
+        [TestCase( -1.00)]
+        [TestCase(-0.50)]
+        [TestCase(0.00)]
+        public void ChargingCurrentValue_NoConnection(double TestCurrent)
         {
             //Act + Arrange
-            double current = 0.00;
+            double current = TestCurrent;
             _charger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = current });
 
             //Assert
@@ -61,11 +65,13 @@ namespace Ladeskabssystem.Test.Unit
         }
 
 
-        [Test]
-        public void ChargingCurrentValue_Charging()
+        [TestCase(6)]
+        [TestCase(499)]
+        [TestCase(500)]
+        public void ChargingCurrentValue_Charging(double TestCurrent)
         {
             //Act + Arrange
-            double current = 500;
+            double current = TestCurrent;
             _charger.Connected.Equals(true);
             _charger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = current });
 
@@ -74,11 +80,13 @@ namespace Ladeskabssystem.Test.Unit
 
         }
 
-        [Test]
-        public void ChargingCurrentValue_ChargingError()
+        [TestCase(501)]
+        [TestCase(600)]
+        [TestCase(1000)]
+        public void ChargingCurrentValue_ChargingError(double TestCurrent)
         {
             //Act + Arrange
-            double current = 600;
+            double current = TestCurrent;
             _charger.Connected.Equals(true);
             _charger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = current });
 
@@ -87,11 +95,14 @@ namespace Ladeskabssystem.Test.Unit
 
         }
 
-        [Test]
-        public void ChargingCurrentValue_FullyCharged()
+        [TestCase(0.50)]
+        [TestCase(1.00)]
+        [TestCase(4.00)]
+        [TestCase(5.00)]
+        public void ChargingCurrentValue_FullyCharged(double TestCurrent)
         {
             //Act + Arrange
-            double current = 2;
+            double current = TestCurrent;
             _charger.Connected.Equals(true);
             _charger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = current });
 
